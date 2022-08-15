@@ -9,7 +9,7 @@ import appChain from '../config.js'
 import { formatGrab, formatNFT } from '../helpers/formatters'
 
 const Grabs = () => {
-  const { web3 } = useMoralis()
+  const { web3, isWeb3Enabled, enableWeb3 } = useMoralis()
   const { switchNetwork, chainId, account } = useChain();
   const Web3ExecuteFunction = useWeb3ExecuteFunction();
   const Web3Api = useMoralisWeb3Api();
@@ -24,11 +24,20 @@ const Grabs = () => {
     setGrabInfo(grabInfo);
     onBidOpen();
   }
+
+  const switchAndEnable = async () => {
+    await switchNetwork(appChain.key)
+    const connectorId = window.localStorage.getItem("connectorId");
+    await enableWeb3({ provider: connectorId, anyNetwork: "true" });
+  }
   
   const fetchGrabs = async () => {
     setIsFetching(true)
+    setError(false)
     try {
       const blockNumber = await web3.getBlockNumber();
+      console.log('block number');
+      console.log(blockNumber)
       const functionOptions = {
         abi: contractInfo.abi,
         contractAddress: grabsContract,
@@ -77,10 +86,9 @@ const Grabs = () => {
 
   useEffect( () => {
     if (account && chainId == appChain.key) {
-      console.log('feting grabs')
       fetchGrabs();  
     }
-  }, [account, chainId]);
+  }, [account, chainId, isWeb3Enabled]);
 
   let content = <></>
   if (!account) {
@@ -101,7 +109,7 @@ const Grabs = () => {
   else if (chainId != appChain.key) {
     content = <Center mt={20} textAlign='center'>
       <Text fontSize="lg">
-        Switch network to <Link textDecoration='underline' onClick={()=>switchNetwork(appChain.key)}>{appChain.name}</Link> to view Active Grabs.
+        Switch network to <Link textDecoration='underline' onClick={switchAndEnable}>{appChain.name}</Link> to view Active Grabs.
       </Text>
     </Center>
   }

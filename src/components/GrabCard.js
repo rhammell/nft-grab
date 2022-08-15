@@ -32,6 +32,7 @@ function GrabCard({ grabInfo, onCancelGrab, onBidGrab }) {
       console.log('interval tick')
       const num = await web3.getBlockNumber();
       setBlockNumber(num);
+      console.log(num)
     }, 1000)
     return () => {clearInterval(id)}
   }, [])
@@ -87,8 +88,6 @@ function GrabCard({ grabInfo, onCancelGrab, onBidGrab }) {
         </TableContainer>
       </Box>
       
-
-
 
         {grabInfo.endBlock > 0 && grabInfo.endBlock > blockNumber &&
           <Text>Blocks Remaining: {grabInfo.endBlock - blockNumber}</Text>

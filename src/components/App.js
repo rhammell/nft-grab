@@ -11,20 +11,13 @@ import MyGrabs from './MyGrabs'
 import NotFound from './NotFound'
 
 const App = () => {
-  const { enableWeb3, isAuthenticated, isWeb3Enabled, isWeb3EnableLoading } = useMoralis();
+  const { enableWeb3, isWeb3Enabled, isWeb3EnableLoading } = useMoralis();
 
-  /*
-  useEffect(() => {
+  useEffect( async () => {
     const connectorId = window.localStorage.getItem("connectorId");
-    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
-      enableWeb3({ provider: connectorId });
-  }, [isAuthenticated, isWeb3Enabled]);
-  */
-
-  useEffect(() => {
-    const connectorId = window.localStorage.getItem("connectorId");
-    if (connectorId && !isWeb3Enabled && !isWeb3EnableLoading)
-      enableWeb3({ provider: connectorId });
+    if (connectorId && !isWeb3Enabled && !isWeb3EnableLoading) {
+      await enableWeb3({ provider: connectorId, anyNetwork: "true" });
+    }
   }, []);
 
   return (

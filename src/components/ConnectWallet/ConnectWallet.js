@@ -78,7 +78,6 @@ const ConnectWallet = () => {
                   onClick={async () => {
                     try {
                       await enableWeb3({ provider: connectorId, anyNetwork: true });
-                      //await authenticate({ provider: connectorId, signingMessage:"Authenticate with NFT Grab to view, bid, and create NFT auctions." });
                       window.localStorage.setItem("connectorId", connectorId);
                       onConnectClose();
                     } catch (e) {
