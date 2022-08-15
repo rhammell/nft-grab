@@ -9,7 +9,8 @@ import appChain from '../config.js'
 import { formatGrab, formatNFT } from '../helpers/formatters'
 
 const Grabs = () => {
-  const { web3, switchNetwork, chainId, account } = useMoralis()
+  const { web3 } = useMoralis()
+  const { switchNetwork, chainId, account } = useChain();
   const Web3ExecuteFunction = useWeb3ExecuteFunction();
   const Web3Api = useMoralisWeb3Api();
   const { isOpen: isBidOpen, onOpen: onBidOpen, onClose: onBidClose } = useDisclosure();
