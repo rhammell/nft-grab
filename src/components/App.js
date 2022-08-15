@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { useMoralis } from "react-moralis"
 
-import Layout from './components/Layout'
-import Home from './components/Home'
-import Grabs from './components/Grabs'
-import NewGrab from './components/NewGrab'
-import MyGrabs from './components/MyGrabs'
-import NotFound from './components/NotFound'
+import Layout from './Layout'
+import Home from './Home'
+import Grabs from './Grabs'
+import NewGrab from './NewGrab'
+import MyGrabs from './MyGrabs'
+import NotFound from './NotFound'
 
 const App = () => {
   const { enableWeb3, isAuthenticated, isWeb3Enabled, isWeb3EnableLoading } = useMoralis();
